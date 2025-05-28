@@ -16,6 +16,13 @@ const pokemon = {
         "secondary-type" : "Fairy",
         "hp" : 100,
         "signature-move" : "Aqua Jet"
+    },
+    "Unown" : {
+        "name" : "Unown",
+        "primary-type" : "Psychic",
+        "secondary-type" : "None",
+        "hp" : 1,
+        "signature-move" : "Hidden Power"
     }
 }
 
@@ -24,8 +31,8 @@ app.get('/', (request,response) => {
 })
 
 app.get('/api/:pokemonName', (request,response) => {
-    console.log(request.params.pokemonName)
-    response.json(pokemon)
+    const pokemonNames = request.params.pokemonName
+    pokemon[pokemonNames] ? response.json(pokemon[pokemonNames]) : response.json(pokemon["Unown"])
 })
 
 app.listen(PORT, () =>{
